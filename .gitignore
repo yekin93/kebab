@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+contact-sheet.jpg
+.env.local
+.env.*.local
+qa/qr-validation/

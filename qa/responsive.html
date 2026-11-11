@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Responsive QA</title>
+    <style>
+      body {
+        margin: 0;
+        background: #ddd;
+      }
+      h2 {
+        font: 16px monospace;
+        margin: 10px;
+      }
+      iframe {
+        display: block;
+        border: 0;
+        margin-bottom: 30px;
+        height: 850px;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>375px</h2>
+    <iframe title="375px mobile" src="/" width="375"></iframe>
+    <h2>768px</h2>
+    <iframe title="768px tablet" src="/" width="768"></iframe>
+    <h2>1024px</h2>
+    <iframe title="1024px laptop" src="/" width="1024"></iframe>
+    <h2>1440px</h2>
+    <iframe title="1440px desktop" src="/" width="1440"></iframe>
+  </body>
+</html>
+<script>
+const report=document.createElement('pre'); report.style.cssText='font:13px monospace;padding:15px;white-space:pre-wrap;background:#fff';document.body.prepend(report);
+setInterval(()=>{report.textContent=Array.from(document.querySelectorAll('iframe')).map(frame=>{const doc=frame.contentDocument; if(!doc)return 'Loading'; const broken=Array.from(doc.images).filter(img=>img.complete&&!img.naturalWidth).length;return `${frame.width}px: viewport ${doc.documentElement.clientWidth}px; content ${doc.documentElement.scrollWidth}px; broken images ${broken}`;}).join('\n');},1000);
+</script>

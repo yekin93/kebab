@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Digitale Speisekarte · Responsive Prüfung</title>
+    <style>
+      body {
+        margin: 0;
+        background: #ddd;
+      }
+      iframe {
+        display: block;
+        border: 0;
+        height: 850px;
+        margin-bottom: 24px;
+      }
+      h2,
+      pre {
+        font: 13px monospace;
+        padding: 10px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <pre id="report"></pre>
+    <h2>375px</h2>
+    <iframe width="375" title="375px Speisekarte" src="/speisekarte"></iframe>
+    <h2>768px</h2>
+    <iframe width="768" title="768px Speisekarte" src="/speisekarte"></iframe>
+    <h2>1024px</h2>
+    <iframe width="1024" title="1024px Speisekarte" src="/speisekarte"></iframe>
+    <h2>1440px</h2>
+    <iframe width="1440" title="1440px Speisekarte" src="/speisekarte"></iframe>
+    <script>
+      setInterval(
+        () =>
+          (document.getElementById("report").textContent = Array.from(
+            document.querySelectorAll("iframe"),
+          )
+            .map((frame) => {
+              const doc = frame.contentDocument;
+              return `${frame.width}px: viewport ${doc.documentElement.clientWidth}px, content ${doc.documentElement.scrollWidth}px`;
+            })
+            .join("\n")),
+        1000,
+      );
+    </script>
+  </body>
+</html>
